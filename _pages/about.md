@@ -9,5 +9,5 @@ redirect_from:
 
 CV
 ===
-https://github.com/dongjin-seo2020/CV/blob/main/CV_DongjinSeo.pdf
+[my CV](https://github.com/dongjin-seo2020/CV/blob/main/CV_DongjinSeo.pdf)
 ===
