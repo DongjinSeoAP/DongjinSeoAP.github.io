@@ -7,13 +7,13 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Jiyoung Park"
+title                    : "Dongjin Seo"
 title_separator          : "-"
-name                     : &name "Jiyoung Park"
-description              : &description "TAMU Stat PhD"
-url                      : https://wldyddl5510.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+name                     : &name "Dongjin Seo"
+description              : &description "PhD Student @ Yale Universisty"
+url                      : https://dongjin-seo2020.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "wldyddl5510/wldyddl5510.github.io"
+repository               : "https://dongjin-seo2020.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -80,14 +80,14 @@ analytics:
 
 # Site Author
 author:
-  name             : "Jiyoung Park"
-  avatar           : "profile3.jpg"
-  bio              : "TAMU Stat PhD Student"
-  location         : "College Station, TX, US"
+  name             : "Dongjin Seo"
+  avatar           : "profile.jpg"
+  bio              : ""
+  location         : "New Haven, CT, US"
   employer         :
 #  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
 #  googlescholar    : "http://yourfullgooglescholarurl.com"
-  email            : "wldyddl5510@tamu.edu"
+  email            : "dongjin.seo@yale.edu"
 #  researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
 #  uri              :
 #  bitbucket        :
@@ -96,13 +96,13 @@ author:
 #  flickr           :
 #  facebook         :
 #  foursquare       :
-  github           : "wldyddl5510"
+  github           : "dongjin-seo2020"
 #  google_plus      :
 #  keybase          :
 #  instagram        :
 #  impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
 #  lastfm           :
-  linkedin         : "Jiyoung-park-b13469191"
+  #linkedin         : ""
 #  orcid            : "http://orcid.org/yourorcidurl"
 #  pinterest        :
 #  soundcloud       :
