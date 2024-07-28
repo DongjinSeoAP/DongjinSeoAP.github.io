@@ -11,9 +11,16 @@ author_profile: true
 --->
 {% include base_path %}
 
-## Approximation Theory & Statistical Learning Theory
+## Application of Deep Learning to Photonics
 
-* **Jiyoung Park**, Ian Pelakh, Stephan Wojtowytsch (2023). "Minimum norm interpolation by perceptra: Explicit regularization and implicit bias". *NeurIPS 2023*. [Paper](https://arxiv.org/abs/2311.06138), [Slides](http://wldyddl5510.github.io/files/radial_sym_slides.pdf).
+* **D Seo†**, DW Nam†, J Park, CY Park*, MS Jang*  (2022). "Structural Optimization of a One-Dimensional Freeform Metagrating Deflector via Deep Reinforcement Learning". *ACS Photonics 2022*. [paper](https://pubs.acs.org/doi/abs/10.1021/acsphotonics.1c00839), [source code](https://github.com/dongjin-seo2020/1DFreeFormDQN), [selected as the front cover of 2022 Feb. issue](https://pubs.acs.org/toc/apchd5/9/2).
+
+* "Inverse design of organic light-emitting diode structure based on deep neural networks".
+
+
+## Application of Deep Learning to Other Scientific Domains
+
+* 
 
 <!---
 {% for post in site.publications reversed %}
