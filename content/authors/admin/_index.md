@@ -48,11 +48,6 @@ interests:
 education:
   - area: PhD in Applied Physics (in progress)
     institution: Yale University
-    <!-- summary: |
-      Thesis on _Why LLMs are awesome_. Supervised by [Prof Joe Smith](https://example.com). Presented papers at 5 IEEE conferences with the contributions being published in 2 Springer journals.
-    button:
-      text: 'Read Thesis'
-      url: 'https://example.com' -->
   - area: MS in Electrical Engineering
     institution: Korea Advanced Institute of Science and Technology (KAIST)
   - area: BS in Electrical Engineering
