@@ -1,8 +1,8 @@
 ---
-title: "An example journal article"
+title: "Structural optimization of a one-dimensional freeform metagrating deflector via deep reinforcement learning"
 authors:
 - admin
-- Robert Ford
+- Daniel Wontae Nam
 author_notes:
 - "Equal contribution"
 - "Equal contribution"
