@@ -57,4 +57,4 @@ education:
 ---
 ## About Me
 
-Dongjin Seo is a PhD student at Yale University. His research interests include scientific machine learning, foundation models for physical systems, and inverse design of photonic structures. He has a dream of contributing to the world with technology to make it a better place.
+I am a PhD student at Yale University supervised by Professor [Logan G. Wright](https://www.lgwrightlab.com/). My research interests include scientific machine learning, foundation models for physical systems, and inverse design of photonic structures. I have a dream of contributing to the world with technology to make it a better place.
