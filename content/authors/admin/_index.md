@@ -42,7 +42,8 @@ profiles:
 interests:
   - Foundation Model
   - Scientific Machine Learning
-  - Physics
+  - Photonics
+  - Dynamical Systems
   - Inverse Design
 
 education:
