@@ -15,7 +15,7 @@ superuser: true
 highlight_name: true
 
 # Role/position/tagline
-role: PhD Student
+role: PhD Student in Applied Physics
 tagline: "Exploring the intersection of machine learning and physics."
 
 
