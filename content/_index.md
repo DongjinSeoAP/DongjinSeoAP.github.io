@@ -30,6 +30,7 @@ sections:
           position: center
           parallax: false
 
+
   - block: collection
     content:
       title: Journal Publication
@@ -41,6 +42,17 @@ sections:
     design:
       view: citation
 
+
+   - block: collection
+    content:
+      title: Preprints
+      text: ""
+      filters:
+        folders:
+          - preprints
+        exclude_featured: false
+    design:
+      view: citation
 
   - block: collection
     content:
