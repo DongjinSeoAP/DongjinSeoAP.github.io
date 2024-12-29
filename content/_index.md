@@ -43,7 +43,7 @@ sections:
       view: citation
 
 
-   - block: collection
+  - block: collection
     content:
       title: Preprints
       text: ""
