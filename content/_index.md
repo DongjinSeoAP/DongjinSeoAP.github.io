@@ -37,6 +37,7 @@ sections:
       filters:
         folders:
           - publication
+        limit: 20
         exclude_featured: false
     design:
       view: citation
