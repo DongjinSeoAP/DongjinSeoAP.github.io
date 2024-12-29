@@ -1,11 +1,8 @@
 ---
-title: "[J1] Structural optimization of a one-dimensional freeform metagrating deflector via deep reinforcement learning"
+title: "[J2] Inverse design of organic light-emitting diode structure based on deep neural networks"
 authors:
-- Dongjin Seo†
-- Daniel Wontae Nam†
-- Juho Park
-- Chan Y. Park*
-- Min Seok Jang*
+- Sanmun Kim, Jeong Min Shin, Jaeho Lee, Chanhyung Park, Songju Lee, Juho Park, Dongjin Seo, Sehong Park, Chan Y Park, Min Seok Jang
+
 author_notes:
 - "Equal contribution"
 - "Equal contribution"
