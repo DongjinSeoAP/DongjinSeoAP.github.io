@@ -1,12 +1,12 @@
 ---
 title: "
 
-[J2] Structural optimization of a one-dimensional freeform metagrating deflector via deep reinforcement learning  
+Structural optimization of a one-dimensional freeform metagrating deflector via deep reinforcement learning  
 
 *featured as the front cover article in 2022 February issue
 "
 authors:
-- Dongjin Seo†
+- [J2] Dongjin Seo†
 - Daniel Wontae Nam†
 - Juho Park
 - Chan Y. Park*
