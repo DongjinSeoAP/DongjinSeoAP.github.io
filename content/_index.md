@@ -36,7 +36,7 @@ sections:
       text: ""
       filters:
         folders:
-          - journal publication
+          - journalpublication
         exclude_featured: false
     design:
       view: citation
@@ -48,7 +48,7 @@ sections:
       text: ""
       filters:
         folders:
-          - journal publication
+          - conferencepublication
         exclude_featured: false
     design:
       view: citation
