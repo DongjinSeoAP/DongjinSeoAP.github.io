@@ -1,12 +1,12 @@
 ---
-title: "[J2] Inverse design of organic light-emitting diode structure based on deep neural networks"
+title: "[J1] Inverse design of organic light-emitting diode structure based on deep neural networks"
 authors:
 - Sanmun Kim, Jeong Min Shin, Jaeho Lee, Chanhyung Park, Songju Lee, Juho Park, Dongjin Seo, Sehong Park, Chan Y Park, Min Seok Jang
 
 author_notes:
 - "Equal contribution"
 - "Equal contribution"
-date: "2021-09-01T00:00:00Z"
+date: "2021-08-01T00:00:00Z"
 doi: ""
 
 # Schedule page publish date (NOT publication's date).
