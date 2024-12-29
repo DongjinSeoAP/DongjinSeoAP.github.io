@@ -37,7 +37,6 @@ sections:
       filters:
         folders:
           - journal publication
-        limit: 20
         exclude_featured: false
     design:
       view: citation
@@ -50,7 +49,6 @@ sections:
       filters:
         folders:
           - journal publication
-        limit: 20
         exclude_featured: false
     design:
       view: citation
