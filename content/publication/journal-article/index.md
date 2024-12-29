@@ -36,8 +36,8 @@ featured: false
 # links:
 # - name: ""
 #   url: ""
-url_paper: http://arxiv.org/pdf/1512.04133v1
-url_code: 'https://github.com/HugoBlox/hugo-blox-builder'
+url_paper: 'https://pubs.acs.org/doi/full/10.1021/acsphotonics.1c00839'
+url_code: 'https://github.com/dongjin-seo2020/1DFreeFormDQN'
 url_dataset: ''
 url_poster: ''
 url_project: ''
