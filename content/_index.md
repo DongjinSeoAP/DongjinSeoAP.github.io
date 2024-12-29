@@ -32,11 +32,24 @@ sections:
 
   - block: collection
     content:
-      title: Publication
+      title: Journal Publication
       text: ""
       filters:
         folders:
-          - publication
+          - journal publication
+        limit: 20
+        exclude_featured: false
+    design:
+      view: citation
+
+
+  - block: collection
+    content:
+      title: Conference Publication
+      text: ""
+      filters:
+        folders:
+          - journal publication
         limit: 20
         exclude_featured: false
     design:
