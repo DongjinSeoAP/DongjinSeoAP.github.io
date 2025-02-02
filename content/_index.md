@@ -31,40 +31,6 @@ sections:
           parallax: false
 
 
-  - block: collection
-    content:
-      title: Journal Publication
-      text: ""
-      filters:
-        folders:
-          - journalpublication
-        exclude_featured: false
-    design:
-      view: citation
-
-
-  - block: collection
-    content:
-      title: Preprints
-      text: ""
-      filters:
-        folders:
-          - preprints
-        exclude_featured: false
-    design:
-      view: citation
-
-  - block: collection
-    content:
-      title: Conference Publication
-      text: ""
-      filters:
-        folders:
-          - conferencepublication
-        exclude_featured: false
-    design:
-      view: citation
-
 
   - block: collection
     id: news
