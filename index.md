@@ -4,19 +4,28 @@ layout: homepage
 
 ## About Me
 
-I am a Ph.D. student at ...
+I am a PhD student at Yale University supervised by Professor [Logan G. Wright](https://www.lgwrightlab.com/). My research interests include scientific machine learning, foundation models for physical systems, and inverse design of photonic structures. I have a dream of contributing to the world with technology to make it a better place.
 
 ## Research Interests
 
-- **Computer Vision:** image recognition, image generation, video captioning
-- **Machine Learning:** meta-learning, incremental learning, transfer learning
+  - Foundation Model
+  - Scientific Machine Learning
+  - Photonics
+  - Dynamical Systems
+  - Inverse Design
+
+## Education
+
+  - PhD in Applied Physics (in progress)
+    institution: Yale University
+  - MS in Electrical Engineering
+    institution: Korea Advanced Institute of Science and Technology (KAIST)
+  - BS in Electrical Engineering
+    institution: Korea Advanced Institute of Science and Technology (KAIST)
 
 ## News
 
-- **[Feb. 2020]** Our paper about incremental learning is accepted to CVPR 2020.
-- **[Feb. 2020]** We will host the ACM Multimedia Asia 2020 conference in Singapore!
-- **[Sept. 2019]** Our paper about few-shot learning is accepted to NeurIPS 2019.
-- **[Mar. 2019]** Our paper about few-shot learning is accepted to CVPR 2019.
+- **[Sep. 2024]** 🥳 I started my academic journey as a PhD student!
 
 {% include_relative _includes/publications.md %}
 
