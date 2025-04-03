@@ -14,4 +14,7 @@
 </ul>
 
 <h4 style="margin:0 10px 0;">Invited Talks</h4>
-
+<ul style="margin:0 0 20px;">
+  <li><a href=""><autocolor>Invited Talk at KC Ml2, Recent research trends, 25 Jan 2024</autocolor></a></li>
+  <li><a href=""><autocolor>Invited Talk at META Research Lab, MIT, Structural optimization ofone-dimensional freeform metagrating deflector via deep reinforcement learning, 9 Jun 2023</autocolor></a></li>
+</ul>
