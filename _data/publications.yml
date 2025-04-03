@@ -2,19 +2,23 @@ preprint:
   - title: "Wave Interpolation Neural Operator: Interpolated Prediction of Electric Fields Across Untrained Wavelengths"
     authors: J Seo†, C Kang†, <strong>D Seo</strong>, H Chung
     conference: arXiv
+    conference_short: "Under Review"
 
 jour:
   - title: "ASOptimizer™: optimizing antisense oligonucleotides through deep learning for IDO1 gene regulation"
     authors: G Hwang†, M Gwon†, <strong>D Seo</strong>, DH Kim, K Lee, E Kim, M Kang*, J Ryu
     conference: Molecular Therapy Nucleic Acids, 2024
+    conference_short: "Journal"
 
   - title: "Sample-efficient inverse design of freeform nanophotonic devices with physics-informed reinforcement learning"
     authors: C Park†, S Kim†, W Jeong†, J Park, <strong>D Seo</strong>, Y Kim, C Park, CY Park*, MS Jang*
     conference: Nanophotonics, 2024
+    conference_short: "Journal"
 
   - title: "Adjoint Method in Machine Learning: A Pathway to Efficient Inverse Design of Photonic Devices"
     authors: C Kang†, <strong>D Seo†</strong>, S V Boriskina, H Chung*
     conference: Materials & Design, 2024
+    conference_short: "Journal"
 
   - title: "Structural Optimization of a One-Dimensional Freeform Metagrating Deflector via Deep Reinforcement Learning"
     authors: <strong>D Seo†</strong>, DW Nam†, J Park, CY Park*, MS Jang*
@@ -22,44 +26,55 @@ jour:
     code: https://github.com/dongjin-seo2020/1DFreeFormDQN
     notes: Front Cover of 2022 Feb. Issue
     image: ./assets/img/2022ACSPhotonics.jpg
+    conference_short: "Journal"
 
   - title: "Inverse design of organic light-emitting diode structure based on deep neural networks"
     authors: S Kim, JM Shin, J Lee, C Park, S Lee, J Park, <strong>D Seo</strong>, S Park, CY Park, MS Jang*
     conference: Nanophotonics, 2021
+    conference_short: "Journal"
 
 conf:
   - title: "Physics-guided Optimization of Photonic Structures using Denoising Diffusion Probabilistic Models"
     authors: <strong>D Seo</strong>†, S Um†, S Lee, J Ye, H Chung
     conference: NeurIPS 2024 Workshop / Machine Learning and the Physical Sciences (poster), Dec 2024
+    conference_short: "Conference"
 
   - title: "Wave Interpolation Neural Operator: Interpolated Prediction of Electric Fields Across Untrained Wavelengths"
     authors: J Seo†, C Kang†, <strong>D Seo</strong>, H Chung
     conference: NeurIPS 2024 Workshop / Data-driven and Differentiable Simulations (poster), Dec 2024
+    conference_short: "Conference"
 
   - title: "Adjoint sensitivity analysis based photonic structure efficiency prediction and data augmentation"
     authors: C Kang†, <strong>D Seo</strong>†, S V Boriskina, H Chung
     conference: CLEO-PR 2024 (poster), Aug 2024
+    conference_short: "Conference"
 
   - title: "High-Speed Multiwavelength Adjoint Optimization with Surrogate Solver"
     authors: J Seo†, C Kang†, <strong>D Seo</strong>, H Chung
     conference: CLEO-PR 2024 (poster), Aug 2024
+    conference_short: "Conference"
 
   - title: "Physics-guided Diffusion Models for Inverse Design"
     authors: <strong>D Seo</strong>†, S Um†, J Ye, H Chung
     conference: CLEO-PR 2024 (poster), Aug 2024
+    conference_short: "Conference"
 
   - title: "Contextualized and Aligned Audio-Text Fusion Models for Emotion Recognition"
     authors: S Choi, Y Kwon, <strong>D Seo</strong>
     conference: KCC 2023 (poster), Dec 2023
+    conference_short: "Conference"
 
   - title: "Adjoint Method for Data Augmentation of Photonic Structures"
     authors: <strong>D Seo</strong>, C Kang, H Chung
     conference: Optica Imaging Congress (oral), Aug 2023
+    conference_short: "Conference"
 
   - title: "Deep reinforcement learning enables freeform structure optimization of 1D metagrating deflector"
     authors: <strong>D Seo</strong>, DW Nam, J Park, CY Park, MS Jang
     conference: SPIE Optical Engineering + Applications (oral), Oct 2022
+    conference_short: "Conference"
 
   - title: "Realization of large scale graphene plasmonic resonator using epsilon-near-zero substrate"
     authors: S Kim, S Baek, SY Min, H Ha, <strong>D Seo</strong>, J Kim, G Lee, B Min, MS Jang
     conference: NANO KOREA 2022 (poster), Jul 2022
+    conference_short: "Conference"
