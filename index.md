@@ -16,12 +16,9 @@ I am a PhD student at Yale University supervised by Professor [Logan G. Wright](
 
 ## Education
 
-  - PhD in Applied Physics (in progress)
-    institution: Yale University
-  - MS in Electrical Engineering
-    institution: Korea Advanced Institute of Science and Technology (KAIST)
-  - BS in Electrical Engineering
-    institution: Korea Advanced Institute of Science and Technology (KAIST)
+  - PhD in Applied Physics (in progress), Yale University
+  - MS in Electrical Engineering, Korea Advanced Institute of Science and Technology (KAIST)
+  - BS in Electrical Engineering, Korea Advanced Institute of Science and Technology (KAIST)
 
 ## News
 
