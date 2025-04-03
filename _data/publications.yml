@@ -35,48 +35,48 @@ jour:
 
 conf:
 
-- title: "Physics-guided Optimization of Photonic Structures using Denoising Diffusion Probabilistic Models"
+  - title: "Physics-guided Optimization of Photonic Structures using Denoising Diffusion Probabilistic Models"
 authors: </strong>D Seo</strong>†, S Um†, S Lee, J Ye, H Chung
 conference: NeurIPS 2024 Workshop: Machine Learning and the Physical Sciences (poster), Dec 2024
 
 
-- title: "Wave Interpolation Neural Operator: Interpolated Prediction of Electric Fields Across Untrained Wavelengths"
+  - title: "Wave Interpolation Neural Operator: Interpolated Prediction of Electric Fields Across Untrained Wavelengths"
 authors: J Seo†, C Kang†, </strong>D Seo</strong>, H Chung
 conference: NeurIPS 2024 Workshop: Data-driven and Differentiable Simulations (poster), Dec 2024
 
 
 
-- title: "Adjoint sensitivity analysis based photonic structure efficiency prediction and data augmentation"
+  - title: "Adjoint sensitivity analysis based photonic structure efficiency prediction and data augmentation"
 authors: C Kang†, </strong>D Seo</strong>†, S V Boriskina, H Chung
 conference: CLEO-PR 2024 (poster), Aug 2024
 
 
-- title: "High-Speed Multiwavelength Adjoint Optimization with Surrogate Solver"
+  - title: "High-Speed Multiwavelength Adjoint Optimization with Surrogate Solver"
 authors: J Seo†, C Kang†, </strong>D Seo</strong>, H Chung
 conference: CLEO-PR 2024 (poster), Aug 2024
 
 
 
-- title: "Physics-guided Diffusion Models for Inverse Design"
+  - title: "Physics-guided Diffusion Models for Inverse Design"
 authors: </strong>D Seo</strong>†, S Um†, J Ye, H Chung
 conference: CLEO-PR 2024 (poster), Aug 2024
 
 
-- title: "Contextualized and Aligned Audio-Text Fusion Models for Emotion Recognition"
+  - title: "Contextualized and Aligned Audio-Text Fusion Models for Emotion Recognition"
 authors: S Choi, Y Kwon, </strong>D Seo</strong>
 conference: KCC 2023 (poster), Dec 2023
 
 
-- title: "Adjoint Method for Data Augmentation of Photonic Structures"
+  - title: "Adjoint Method for Data Augmentation of Photonic Structures"
 authors: </strong>D Seo</strong>, C Kang, H Chung
 conference: Optica Imaging Congress (oral), Aug 2023
 
 
-- title: "Deep reinforcement learning enables freeform structure optimization of 1D metagrating deflector"
+  - title: "Deep reinforcement learning enables freeform structure optimization of 1D metagrating deflector"
 authors: </strong>D Seo</strong>, DW Nam, J Park, CY Park, MS Jang
 conference: SPIE Optical Engineering + Applications (oral), Oct 2022
 
 
-- title: "Realization of large scale graphene plasmonic resonator using epsilon-near-zero substrate"
+  - title: "Realization of large scale graphene plasmonic resonator using epsilon-near-zero substrate"
 authors: S Kim, S Baek, SY Min, H Ha, </strong>D Seo</strong>, J Kim, G Lee, B Min, MS Jang
 conference: NANO KOREA 2022 (poster), Jul 2022
