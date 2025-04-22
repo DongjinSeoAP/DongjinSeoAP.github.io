@@ -4,7 +4,7 @@ preprint:
     conference: arXiv
     conference_short: "preprint"
     #bibtex:
-    #code:
+    code: https://github.com/dongjin-seo2020/AdjointDiffusion
     image: ./assets/img/TOC.png
     #notes:
     pdf: https://arxiv.org/
@@ -26,7 +26,7 @@ jour:
     conference_short: "J5"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/MTNA2024.jpg
     #notes:
     pdf: https://www.cell.com/molecular-therapy-family/nucleic-acids/fulltext/S2162-2531(24)00073-8
 
@@ -36,7 +36,7 @@ jour:
     conference_short: "J4"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/Nanophoton2024.jpg
     #notes:
     pdf: https://www.degruyter.com/document/doi/10.1515/nanoph-2023-0852/html
 
@@ -69,7 +69,7 @@ jour:
     conference_short: "J1"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/Nanophoton2021.jpg
     #notes:
     pdf: https://www.degruyter.com/document/doi/10.1515/nanoph-2021-0434/html
 
