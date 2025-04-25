@@ -150,7 +150,7 @@ conf:
     conference_short: "C2"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/SPIE.png
     #notes:
     pdf: https://www.spiedigitallibrary.org/conference-proceedings-of-spie/12216/122160G/Deep-reinforcement-learning-enables-freeform-structure-optimization-of-1D-metagrating/10.1117/12.2631138.short?SSO=1
 
@@ -160,6 +160,6 @@ conf:
     conference_short: "C1"
     #bibtex:
     #code:
-    image: NanoKorea.png
+    image: ./assets/img/NanoKorea.png
     #notes:
     pdf: https://koasas.kaist.ac.kr/handle/10203/300904
