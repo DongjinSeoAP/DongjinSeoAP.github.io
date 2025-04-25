@@ -7,7 +7,7 @@ preprint:
     code: https://github.com/dongjin-seo2020/AdjointDiffusion
     image: ./assets/img/TOC.png
     #notes:
-    pdf: https://arxiv.org/
+    pdf: https://arxiv.org/abs/2504.17077
 
   - title: "Wave Interpolation Neural Operator: Interpolated Prediction of Electric Fields Across Untrained Wavelengths"
     authors: J Seo†, C Kang†, <strong>D Seo</strong>, H Chung
@@ -160,6 +160,6 @@ conf:
     conference_short: "C1"
     #bibtex:
     #code:
-    #image:
+    image: NanoKorea.png
     #notes:
     pdf: https://koasas.kaist.ac.kr/handle/10203/300904
