@@ -15,6 +15,7 @@
 
 <h4 style="margin:0 10px 0;">Invited Talks</h4>
 <ul style="margin:0 0 20px;">
+   <li><a href=""><autocolor><strong>Invited Talk at McMahon Lab, Cornell University</strong>, Physics-guided and fabrication-aware inverse design using diffusion models, 2 Jul 2025</autocolor></a></li>
   <li><a href=""><autocolor><strong>Invited Talk at KC ML2</strong>, Recent research trends, 25 Jan 2024</autocolor></a></li>
   <li><a href=""><autocolor><strong>Invited Talk at META Research Lab, MIT</strong>, Structural optimization of one-dimensional freeform metagrating deflector via deep reinforcement learning, 9 Jun 2023</autocolor></a></li>
 </ul>
