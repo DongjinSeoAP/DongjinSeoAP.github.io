@@ -80,7 +80,7 @@ conf:
     conference_short: "C9"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/C9.png
     #notes:
     pdf: https://ml4physicalsciences.github.io/2024/files/NeurIPS_ML4PS_2024_16.pdf
 
@@ -90,7 +90,7 @@ conf:
     conference_short: "C8"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/C8.png
     #notes:
     pdf: https://openreview.net/pdf?id=gr8iuaLeaN
 
@@ -100,7 +100,7 @@ conf:
     conference_short: "C7"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/C7.png
     #notes:
     pdf: https://opg.optica.org/abstract.cfm?uri=cleopr-2024-Mo1A_1
 
@@ -110,7 +110,7 @@ conf:
     conference_short: "C6"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/C6.png
     #notes:
     pdf: https://ieeexplore.ieee.org/abstract/document/10676462
 
@@ -120,7 +120,7 @@ conf:
     conference_short: "C5"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/C5.png
     #notes:
     pdf: https://ieeexplore.ieee.org/abstract/document/10676695
 
@@ -130,7 +130,7 @@ conf:
     conference_short: "C4"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/C4.png
     #notes:
     pdf: https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE11488636&googleIPSandBox=false&mark=0&minRead=5&ipRange=false&b2cLoginYN=false&icstClss=080000&isPDFSizeAllowed=true&accessgl=Y&language=ko_KR&hasTopBanner=true
 
@@ -140,7 +140,7 @@ conf:
     conference_short: "C3"
     #bibtex:
     #code:
-    #image:
+    image: ./assets/img/C3.png
     #notes:
     pdf: https://opg.optica.org/abstract.cfm?uri=FLATOPTICS-2023-FTu5G.2
 
