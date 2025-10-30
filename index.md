@@ -21,6 +21,7 @@ I am partially supported by the Kwanjeong Scholarship.
   - BS in Electrical Engineering, <strong>KAIST</strong>
 
 ## News
+- **[Oct. 2025]** 📝 One paper has been accepted to ACS Photonics!
 - **[Dec. 2024]** 📝 Two papers have been accepted to NeurIPS 2024 workshops!
 - **[Sep. 2024]** 🥳 I started my academic journey as a PhD student!
 
