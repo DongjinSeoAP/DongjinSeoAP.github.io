@@ -14,12 +14,12 @@ preprint:
 jour:
   - title: "Physics-guided and fabrication-aware inverse design of photonic devices using diffusion models"
     authors: <strong>D Seo</strong>†, S Um†, S Lee, J Ye*, H Chung*
-    conference: ACS Photonics
+    conference: ACS Photonics, 2026
     conference_short: "J6"
     #bibtex:
     code: https://github.com/dongjin-seo2020/AdjointDiffusion
     image: ./assets/img/TOC.png
-    #notes:
+    notes: Supplementary Cover of 2026 Jan. Issue
     pdf: https://arxiv.org/abs/2504.17077
 
   - title: "ASOptimizer™: optimizing antisense oligonucleotides through deep learning for IDO1 gene regulation"
