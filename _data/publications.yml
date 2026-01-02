@@ -18,9 +18,9 @@ jour:
     conference_short: "J6"
     #bibtex:
     code: https://github.com/dongjin-seo2020/AdjointDiffusion
-    image: ./assets/img/TOC.png
+    image: ./assets/img/cover_2025.png
     notes: Supplementary Cover of 2026 Jan. Issue
-    pdf: https://arxiv.org/abs/2504.17077
+    pdf: https://pubs.acs.org/doi/10.1021/acsphotonics.5c00993
 
   - title: "ASOptimizer™: optimizing antisense oligonucleotides through deep learning for IDO1 gene regulation"
     authors: G Hwang†, M Gwon†, <strong>D Seo</strong>, DH Kim, K Lee, E Kim, M Kang*, J Ryu
