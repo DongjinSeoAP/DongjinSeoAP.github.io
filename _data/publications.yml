@@ -1,7 +1,7 @@
 preprint:
 
 
-  - title: "Wave Interpolation Neural Operator: Interpolated Prediction of Electric Fields Across Untrained Wavelengths"
+  - title: "Generalizing Deep Surrogate Solvers for Broadband Electromagnetic Field Prediction at Unseen Wavelengths"
     authors: J Seo†, C Kang†, <strong>D Seo</strong>, H Chung*
     conference: arXiv
     conference_short: "Under Review"
