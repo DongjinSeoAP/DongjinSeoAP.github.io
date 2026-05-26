@@ -1,11 +1,12 @@
 <h2 id="publications" style="margin: 2px 0px -15px;"><u>Publications</u></h2>
 
+<br>
+
 <div class="pub-filter">
   <button class="active" data-filter="all">All</button>
   <button data-filter="photonics">Photonics</button>
   <button data-filter="ml">ML</button>
   <button data-filter="inverse">Inverse Design</button>
-  <button data-filter="review">Review</button>
 </div>
 
 <div class="publications">

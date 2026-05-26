@@ -50,7 +50,7 @@ jour:
     authors: C Kang†, <strong>D Seo†</strong>, S V Boriskina, H Chung*
     conference: Materials & Design, 2024
     conference_short: "J3"
-    categories: "photonics ml review inverse"
+    categories: "photonics ml inverse"
     #bibtex:
     #code:
     image: ./assets/img/Adjoint_method.png
