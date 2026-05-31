@@ -5,3 +5,7 @@ Gemfile.lock
 .DS_Store
 .jekyll-cache
 git-update.sh
+
+# manim render artifacts (keep source in manim/, ignore outputs)
+media/
+__pycache__/

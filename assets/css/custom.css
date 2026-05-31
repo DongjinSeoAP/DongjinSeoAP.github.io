@@ -233,6 +233,82 @@
 
 .pub-item.hidden { display: none; }
 
+/* ====== Post figures & videos ====== */
+.post-fig {
+  margin: 24px auto;
+  text-align: center;
+}
+.post-fig img,
+.post-fig video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+}
+.post-fig figcaption {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 8px;
+  line-height: 1.45;
+}
+.post-fig.narrow img,
+.post-fig.narrow video { max-width: 560px; }
+@media (prefers-color-scheme: dark) {
+  .post-fig img,
+  .post-fig video { border-color: #2f3140; }
+  .post-fig figcaption { color: #9a9ca6; }
+}
+
+/* ====== Blockquotes (blend with page bg instead of the theme's white box) ====== */
+blockquote {
+  background: transparent !important;
+  border-left: 3px solid #043361;
+  margin: 1.2em 0;
+  padding: 0.4em 0 0.4em 16px;
+  font-style: normal;
+  color: inherit;
+  font-size: 1rem;
+}
+@media (prefers-color-scheme: dark) {
+  blockquote { border-left-color: #3eb7f0; }
+}
+
+/* ====== Blog category badges + filter ====== */
+.cat-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 2px 9px;
+  border-radius: 10px;
+  margin-right: 8px;
+  background: #043361;
+  color: #fff;
+  vertical-align: middle;
+}
+.cat-badge.cat-ai-for-physicists { background: #3eb7f0; color: #08263f; }
+.cat-badge.cat-paper-explained  { background: #043361; color: #fff; }
+@media (prefers-color-scheme: dark) {
+  .cat-badge.cat-paper-explained { background: #1d4e7e; color: #eaf4fb; }
+}
+
+/* ====== Inline code (theme hard-codes #333, unreadable in dark mode) ====== */
+code {
+  background: rgba(4, 51, 97, 0.08);
+  color: #043361;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+pre { background: #f4f7fb; }
+pre code { background: transparent; color: inherit; padding: 0; font-size: inherit; }
+@media (prefers-color-scheme: dark) {
+  code { background: rgba(62, 183, 240, 0.16); color: #8fd3f4; }
+  pre { background: #262834; color: #dadbdf; }
+  pre code { color: #dadbdf; }
+}
+
 /* ====== Blog list ====== */
 .blog-list { list-style: none; padding: 0; margin: 0; }
 .blog-list li {
