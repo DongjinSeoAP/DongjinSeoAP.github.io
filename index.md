@@ -7,7 +7,7 @@ layout: homepage
 <br>
 
 I am a PhD student at Yale University supervised by Professor [Logan G. Wright](https://www.lgwrightlab.com/). My research interests include scientific machine learning, foundation models for physical systems, and inverse design of photonic structures. I dream of contributing to the world with technology to make it a better place.
-I am partially supported by the Kwanjeong Scholarship.
+I am partially supported by the Kwanjeong Scholarship. I am also partially supported by the Yale Planetary Solutions Doctoral Fellowship.
 
 <h2 id="research" style="margin: 2px 0px -15px;"><u>Research Interests</u></h2>
 
