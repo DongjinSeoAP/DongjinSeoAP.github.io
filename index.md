@@ -13,6 +13,13 @@ I am partially supported by the Kwanjeong Scholarship. I am also partially suppo
 
 <br>
 
+My research goal: <strong>AI understands physics</strong>. For this, we need to clarify:
+
+- what is physics?
+- what is understanding?
+
+<br>
+
 <div class="interest-grid">
   <div class="interest-card"><span class="icon">🧠</span>Foundation Models</div>
   <div class="interest-card"><span class="icon">🔬</span>Scientific ML</div>
