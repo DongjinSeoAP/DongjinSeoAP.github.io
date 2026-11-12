@@ -1,18 +1,11 @@
 ---
-layout: homepage
+layout: post
 title: "AI for Physicists 1: Gradient Descent"
 date: 2026-05-26
 label: "AI for Physicists"
 description: "Re-reading gradient descent with a physicist's intuition: potential landscapes, forces, and why it is the starting point of modern ML."
+toc: true
 ---
-
-<h2 style="margin: 2px 0px -15px;"><u>AI for Physicists 1: Gradient Descent</u></h2>
-
-<br>
-
-<small><em>{{ page.date | date: "%B %d, %Y" }}</em></small>
-
-<br><br>
 
 ## Why start with gradient descent?
 
@@ -80,6 +73,3 @@ This is a **noisy gradient**. The noise acts like thermal noise: it shakes the p
 
 These four ideas cover almost all of modern deep learning training. In the next post I will look at backpropagation, through a lens physicists already know well: the **adjoint method**.
 
-<br>
-
-<small>← [Back to Blog]({{ '/blog/' | relative_url }})</small>

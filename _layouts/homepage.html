@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
-    <title>{{ site.title }} | {{site.affiliation}}</title>
+    <title>{% if page.title %}{{ page.title | escape }} | {{ site.title }}{% else %}{{ site.title }} | {{ site.affiliation }}{% endif %}</title>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ site.description }}">
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
     {% if site.keywords %}
     <meta name="keywords" content="{{ site.keywords }}">
     {% endif %}
-    {% if site.canonical %}
-    <link rel="canonical" href="{{ site.canonical }}"/>
-    {% endif %}
+    <link rel="canonical" href="{{ page.url | replace: 'index.html', '' | absolute_url }}"/>
 
     <link rel="icon" media="(prefers-color-scheme:dark)" href="{{ site.favicon_dark | relative_url }}" type="image/png" />
     <link rel="icon" media="(prefers-color-scheme:light)" href="{{ site.favicon | relative_url }}" type="image/png" />
@@ -36,7 +34,7 @@
     <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
   </head>
-  <body>
+  <body{% if page.layout == 'post' %} class="is-post"{% endif %}>
     <div class="wrapper">
       <header>
         

@@ -1,18 +1,11 @@
 ---
-layout: homepage
+layout: post
 title: "Designing Photonic Devices with Diffusion Models + Physics: AdjointDiffusion"
 date: 2026-05-31
 label: "Paper Explained"
 description: "An intuitive walkthrough of our ACS Photonics paper: how combining a generative diffusion model with the adjoint method discovers high-performance, fabricable photonic devices."
+toc: true
 ---
-
-<h2 style="margin: 2px 0px -15px;"><u>Designing Photonic Devices with Diffusion Models + Physics: AdjointDiffusion</u></h2>
-
-<br>
-
-<small><em>{{ page.date | date: "%B %d, %Y" }}</em></small>
-
-<br><br>
 
 This post is an accessible walkthrough of our paper, **["Physics-Guided and Fabrication-Aware Inverse Design of Photonic Devices Using Diffusion Models"](https://pubs.acs.org/doi/10.1021/acsphotonics.5c00993)** (ACS Photonics, 2026). The code is on [GitHub](https://github.com/dongjin-seo2020/AdjointDiffusion). I'll skip the heavy math and try to give the intuition instead.
 
@@ -123,6 +116,3 @@ If you'd like the full details, the [paper is here](https://pubs.acs.org/doi/10.
 
 > **Citation.** D. Seo, S. Um, S. Lee, J. C. Ye, and H. Chung, "Physics-Guided and Fabrication-Aware Inverse Design of Photonic Devices Using Diffusion Models," *ACS Photonics* (2026). DOI: [10.1021/acsphotonics.5c00993](https://pubs.acs.org/doi/10.1021/acsphotonics.5c00993)
 
-<br>
-
-<small>← [Back to Blog]({{ '/blog/' | relative_url }})</small>

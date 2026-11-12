@@ -6,9 +6,9 @@ email: dongjin.seo@yale.edu
 
 # Search Engine Optimization (SEO)
 # The following information is used to improve the website traffic from search engines, e.g., Google.
-keywords: minimal light
-description: The Minimal Light is a simple and elegant jekyll theme for academic personal homepage.
-canonical: https://minimal-light-theme.yliu.me/
+keywords: Dongjin Seo, scientific machine learning, foundation models, photonics, inverse design, Yale
+description: Dongjin Seo is a Ph.D. student at Yale University working on scientific machine learning, foundation models for physical systems, inverse design, and learning algorithms.
+url: https://dongjinseoap.github.io
 
 # Links 
 # If you don't need one of them, you may delete the corresponding line.

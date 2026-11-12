@@ -1,0 +1,68 @@
+---
+layout: homepage
+---
+{%- assign words = content | strip_html | number_of_words -%}
+{%- assign minutes = words | plus: 219 | divided_by: 220 -%}
+{%- assign real_posts = site.posts | where_exp: "p", "p.placeholder != true" -%}
+{%- for p in real_posts -%}
+  {%- if p.url == page.url -%}
+    {%- assign newer_i = forloop.index0 | minus: 1 -%}
+    {%- assign older_i = forloop.index0 | plus: 1 -%}
+    {%- if newer_i >= 0 -%}{%- assign newer = real_posts[newer_i] -%}{%- endif -%}
+    {%- assign older = real_posts[older_i] -%}
+  {%- endif -%}
+{%- endfor -%}
+<article class="post">
+  <div class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+    <div class="post-meta">
+      {% if page.label %}<span class="cat-badge cat-{{ page.label | slugify }}">{{ page.label }}</span>{% endif %}
+      <span><a href="{{ '/' | relative_url }}">{{ site.title }}</a></span>
+      <span>{{ page.date | date: "%B %-d, %Y" }}</span>
+      {% unless page.placeholder %}<span>{{ minutes }} min read</span>{% endunless %}
+    </div>
+  </div>
+
+  {% if page.toc %}
+  <details class="post-toc" id="post-toc" open hidden>
+    <summary>Contents</summary>
+    <ol></ol>
+  </details>
+  {% endif %}
+
+  <div class="post-body">
+{{ content }}
+  </div>
+
+  <nav class="post-nav">
+    <div class="post-nav-links">
+      {% if older and page.placeholder != true %}
+      <a class="post-nav-older" href="{{ older.url | relative_url }}"><span>← Older</span>{{ older.title | escape }}</a>
+      {% else %}<span></span>{% endif %}
+      {% if newer and page.placeholder != true %}
+      <a class="post-nav-newer" href="{{ newer.url | relative_url }}"><span>Newer →</span>{{ newer.title | escape }}</a>
+      {% endif %}
+    </div>
+    <a class="post-nav-back" href="{{ '/blog/' | relative_url }}">← Back to Blog</a>
+  </nav>
+</article>
+
+{% if page.toc %}
+<script>
+(function () {
+  var box = document.getElementById('post-toc');
+  var heads = document.querySelectorAll('.post-body h2[id]');
+  if (!box || heads.length < 3) return;
+  var list = box.querySelector('ol');
+  heads.forEach(function (h) {
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+  box.hidden = false;
+})();
+</script>
+{% endif %}

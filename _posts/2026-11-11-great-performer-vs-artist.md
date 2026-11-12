@@ -1,18 +1,10 @@
 ---
-layout: homepage
+layout: post
 title: "A Great Performer, But an Artist? Jazz, Science, and AI"
 date: 2026-11-11 19:18:00
 label: "MetaResearch"
 description: "AI keeps getting better at things we thought only humans could do. A personal reflection on jazz, scientific understanding, and what it means to be a scientist."
 ---
-
-<h2 style="margin: 2px 0px -15px;"><u>A Great Performer, But an Artist? Jazz, Science, and AI</u></h2>
-
-<br>
-
-<small><em>{{ page.date | date: "%B %d, %Y" }}</em></small>
-
-<br><br>
 
 AI is changing the way we work at a frightening pace. And recently, I've been struggling with a bit of a dilemma.
 
@@ -220,6 +212,3 @@ I want to understand the music well enough to have something of my own to say.
 
 And I think that's also how I want to approach science.
 
-<br>
-
-<small>← [Back to Blog]({{ '/blog/' | relative_url }})</small>
