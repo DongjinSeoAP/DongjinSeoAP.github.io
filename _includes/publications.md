@@ -13,6 +13,7 @@
 <ol class="bibliography">
 
 
+{% if site.data.publications.preprint.size > 0 %}
 <h3 style="margin:8px 10px 8px;">Preprint</h3>
 
 {% for link in site.data.publications.preprint %}
@@ -54,6 +55,7 @@
 <br>
 
 {% endfor %}
+{% endif %}
 
 
 
