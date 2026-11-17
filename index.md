@@ -50,3 +50,10 @@ My research goal: <strong>AI understands physics</strong>. For this, we need to 
 {% include_relative _includes/publications.md %}
 
 {% include_relative _includes/services.md %}
+
+<h2 id="teaching" style="margin: 2px 0px -15px;"><u>Teaching</u></h2>
+
+<br>
+
+- Teaching Assistant, *Statistical Methods with Applications in Science and Finance*, Yale University (Fall 2025)
+  - Overall teaching evaluation: 4.6/5.0 (17 student responses; department average: 4.3/5.0).
