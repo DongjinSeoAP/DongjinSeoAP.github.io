@@ -1,18 +1,17 @@
-preprint:
+preprint: []
 
-
-  - title: "Generalizing Deep Surrogate Solvers for Broadband Electromagnetic Field Prediction at Unseen Wavelengths"
+jour:
+  - title: "Broadband Electromagnetic Field Prediction at Unseen Wavelengths via Physics-Guided Neural Operators"
     authors: J Seo†, C Kang†, <strong>D Seo</strong>, H Chung*
-    conference: arXiv
-    conference_short: "Under Review"
+    conference: Nanophotonics, 2026
+    conference_short: "J7"
     categories: "photonics ml"
     #bibtex:
     #code:
     image: ./assets/img/WINO.png
     #notes:
-    pdf: https://arxiv.org/abs/2408.02971
+    pdf: https://doi.org/10.1002/nap2.70242
 
-jour:
   - title: "Physics-guided and fabrication-aware inverse design of photonic devices using diffusion models"
     authors: <strong>D Seo</strong>†, S Um†, S Lee, J Ye*, H Chung*
     conference: ACS Photonics, 2026
