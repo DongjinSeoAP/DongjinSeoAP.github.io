@@ -57,9 +57,3 @@ My research goal: <strong>AI understands physics</strong>. For this, we need to 
 
 - Teaching Assistant, *Statistical Methods with Applications in Science and Finance*, Yale University (Fall 2025)
   - Overall teaching evaluation: 4.6/5.0 (17 student responses; department average: 4.3/5.0).
-
-<h2 id="side-projects" style="margin: 2px 0px -15px;"><u>Side Projects</u></h2>
-
-<br>
-
-- [multitasker](/multitasker/): mash any key and a piano piece plays itself, then code, Minesweeper, chess, a spreadsheet and a trading desk join in, all advancing one step per keystroke.
