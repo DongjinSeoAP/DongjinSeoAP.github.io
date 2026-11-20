@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>multitasker</title>
+<style>
+:root{
+  --bg:#0b0d12; --panel:#141821; --panel2:#1b2030; --line:#262c3a;
+  --text:#e6e9f0; --dim:#8a93a6; --accent:#ffd166; --up:#2ecc71; --down:#ff5d6c;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--bg);color:var(--text);overflow:hidden;
+  font-family:-apple-system,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",system-ui,sans-serif;
+  display:flex;flex-direction:column;user-select:none;-webkit-user-select:none;
+}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+
+/* ---------- top bar ---------- */
+header{
+  display:flex;align-items:center;gap:18px;padding:8px 14px;
+  border-bottom:1px solid var(--line);flex:none;
+}
+header h1{font-size:15px;margin:0;letter-spacing:.5px}
+header h1 span{color:var(--accent)}
+.stats{display:flex;gap:16px;margin-left:auto;font-size:12px;color:var(--dim);flex-wrap:wrap}
+.stats b{color:var(--text);font-variant-numeric:tabular-nums;margin-left:4px}
+#mute{
+  background:var(--panel2);color:var(--text);border:1px solid var(--line);
+  border-radius:6px;padding:3px 8px;font-size:13px;cursor:pointer;
+}
+
+/* ---------- grid ---------- */
+#grid{
+  flex:1;min-height:0;display:grid;gap:8px;padding:8px;
+  grid-template-columns:repeat(var(--cols,1),minmax(0,1fr));grid-auto-rows:minmax(0,1fr);
+}
+#grid[data-n="2"]{--cols:2} #grid[data-n="3"]{--cols:3} #grid[data-n="4"]{--cols:2}
+#grid[data-n="5"],#grid[data-n="6"]{--cols:3}
+@media (max-width:720px){
+  #grid[data-n="2"]{--cols:1}
+  #grid[data-n="3"],#grid[data-n="4"],#grid[data-n="5"],#grid[data-n="6"]{--cols:2}
+  .stats .opt{display:none}
+}
+.panel{
+  display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  animation:pop .35s cubic-bezier(.2,1.4,.4,1);
+}
+.panel[hidden]{display:none}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.bar{
+  display:flex;align-items:center;gap:8px;padding:6px 10px;font-size:12px;
+  background:var(--panel2);border-bottom:1px solid var(--line);flex:none;white-space:nowrap;overflow:hidden;
+}
+.bar .dots{display:flex;gap:4px}
+.bar .dots i{width:8px;height:8px;border-radius:50%;background:#ff5f57}
+.bar .dots i:nth-child(2){background:#febc2e}.bar .dots i:nth-child(3){background:#28c840}
+.bar .sub{margin-left:auto;color:var(--dim);overflow:hidden;text-overflow:ellipsis}
+.body{flex:1;min-height:0;position:relative;overflow:hidden}
+.body canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* ---------- code ---------- */
+#codeOut{
+  position:absolute;inset:0;margin:0;padding:10px 12px;overflow:hidden;
+  font-size:12px;line-height:1.45;color:#5dff9b;white-space:pre-wrap;word-break:break-all;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+#codeOut span::after{content:"▋";animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- minesweeper ---------- */
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+#msHead{display:flex;gap:14px;font-size:13px;align-items:center}
+#msHead .lcd{background:#000;color:#ff3b3b;padding:1px 6px;border-radius:3px;font-weight:700}
+#msBoard{display:grid;gap:1px;background:#0e1118;padding:1px}
+#msBoard div{
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  background:#3a4358;border-radius:2px;
+}
+#msBoard div.o{background:#1e2433}
+#msBoard div.cur{outline:2px solid var(--accent);outline-offset:-2px}
+.n1{color:#6aa5ff}.n2{color:#5fd38a}.n3{color:#ff6b6b}.n4{color:#b08cff}
+.n5{color:#ffa94d}.n6{color:#4dd6d6}.n7{color:#ddd}.n8{color:#999}
+
+/* ---------- chess ---------- */
+#chRow{display:flex;gap:6px;align-items:stretch}
+#chEval{width:8px;background:#222;border-radius:3px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+#chEval i{display:block;background:#f2f2f2;height:50%;transition:height .3s}
+#chBoard{display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);border-radius:4px;overflow:hidden}
+#chBoard div{display:flex;align-items:center;justify-content:center;line-height:1;background:#b9c6e0}
+#chBoard div.d{background:#6f86b3}
+#chBoard div.hl{box-shadow:inset 0 0 0 100px rgba(255,209,102,.45)}
+#chBoard .w{color:#fff;text-shadow:0 1px 2px #000,0 0 2px #000}
+#chBoard .b{color:#10131a}
+#chInfo{font-size:12px;color:var(--dim);height:16px}
+#chInfo b{color:var(--text)}
+
+/* ---------- excel ---------- */
+#xl{position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;color:#1c1c1c;font-size:12px}
+#xlFx{display:flex;border-bottom:1px solid #d5d5d5;flex:none}
+#xlFx span{padding:4px 8px;border-right:1px solid #d5d5d5;min-width:44px;text-align:center}
+#xlFx em{color:#888;font-style:italic}
+#xlFx #xlFormula{flex:1;text-align:left;border:0;white-space:nowrap;overflow:hidden}
+#xlTable{border-collapse:collapse;width:100%;table-layout:fixed;flex:1}
+#xlTable th{background:#f1f3f4;color:#555;font-weight:500;border:1px solid #d5d5d5}
+#xlTable th:first-child{width:28px}
+#xlTable td{border:1px solid #e2e2e2;padding:0 6px;text-align:right;white-space:nowrap;overflow:hidden;font-variant-numeric:tabular-nums}
+#xlTable td.l{text-align:left}
+#xlTable td.h{font-weight:700;background:#e8f3ec;text-align:center}
+#xlTable td.t{font-weight:700;border-top:2px solid #1c1c1c}
+#xlTable td.act{outline:2px solid #107c41;outline-offset:-2px}
+#xlTabs{flex:none;background:#f1f3f4;border-top:1px solid #d5d5d5;padding:3px 8px;color:#107c41;font-weight:600}
+
+/* ---------- trading ---------- */
+#trWrap{position:absolute;inset:0;display:flex;flex-direction:column}
+#trHead{display:flex;gap:12px;align-items:baseline;padding:6px 10px;font-size:12px;flex:none;flex-wrap:wrap}
+#trPrice{font-size:18px;font-weight:700;color:var(--up)}
+#trPnl{color:var(--up);font-weight:700}
+#trChart{flex:1;min-height:0;position:relative}
+#trLog{flex:none;height:62px;overflow:hidden;padding:4px 10px;font-size:11px;line-height:1.35;color:var(--dim);border-top:1px solid var(--line)}
+#trLog .buy{color:var(--up)} #trLog .sell{color:var(--down)}
+
+/* ---------- overlay / toast ---------- */
+#intro{
+  position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  pointer-events:none;text-align:center;transition:opacity .6s;z-index:5;
+  background:radial-gradient(ellipse at center,rgba(11,13,18,.92),rgba(11,13,18,.6));
+}
+#intro.gone{opacity:0}
+#intro h2{font-size:clamp(26px,5vw,52px);margin:0 0 10px}
+#intro p{color:var(--dim);margin:0;font-size:15px}
+#intro kbd{display:inline-block;border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:2px 8px;margin:0 2px;background:var(--panel2);animation:tap 1.2s infinite}
+#intro kbd:nth-child(2){animation-delay:.15s}#intro kbd:nth-child(3){animation-delay:.3s}#intro kbd:nth-child(4){animation-delay:.45s}
+@keyframes tap{0%,60%,100%{transform:none}30%{transform:translateY(3px)}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>multi<span>tasker</span></h1>
+  <div class="stats">
+    <span>Keys<b id="sKeys">0</b></span>
+    <span>Per min<b id="sKpm">0</b></span>
+    <span>Tasks<b id="sTasks">1</b></span>
+    <span class="opt">Est. IQ<b id="sIq">100</b></span>
+    <span class="opt">Focus<b id="sFocus">100%</b></span>
+  </div>
+  <button id="mute" title="Sound on/off">🔊</button>
+</header>
+
+<main id="grid" data-n="1">
+  <section class="panel" id="p-piano">
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span class="sub" id="pnTitle"></span></div>
+    <div class="body"><canvas id="pnCanvas"></canvas></div>
+  </section>
+
+  <section class="panel" id="p-code" hidden>
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span class="sub" id="codeName">multitask.ts</span></div>
+    <div class="body"><pre id="codeOut" class="mono"><span></span></pre></div>
+  </section>
+
+  <section class="panel" id="p-mines" hidden>
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span class="sub" id="msSub">Cleared 0</span></div>
+    <div class="body"><div class="center">
+      <div id="msHead" class="mono"><span class="lcd" id="msLeft">000</span><span id="msFace">🙂</span><span class="lcd" id="msOpen">000</span></div>
+      <div id="msBoard" class="mono"></div>
+    </div></div>
+  </section>
+
+  <section class="panel" id="p-chess" hidden>
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span class="sub" id="chSub">0W 0L</span></div>
+    <div class="body"><div class="center">
+      <div id="chRow"><div id="chEval"><i></i></div><div id="chBoard"></div></div>
+      <div id="chInfo" class="mono"></div>
+    </div></div>
+  </section>
+
+  <section class="panel" id="p-excel" hidden>
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span class="sub" id="xlSub">2026_results_final_FINAL_v2.xlsx</span></div>
+    <div class="body"><div id="xl">
+      <div id="xlFx" class="mono"><span id="xlName">A1</span><span><em>fx</em></span><span id="xlFormula"></span></div>
+      <table id="xlTable"></table>
+      <div id="xlTabs">Sheet1</div>
+    </div></div>
+  </section>
+
+  <section class="panel" id="p-trade" hidden>
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span class="sub">MLTK · Multitasker Holdings</span></div>
+    <div class="body"><div id="trWrap">
+      <div id="trHead" class="mono">
+        <span id="trPrice">50,000</span>
+        <span>Realized P&amp;L <span id="trPnl">+0</span></span>
+        <span>Win rate <b id="trWin">-</b></span>
+        <span id="trPos" style="color:var(--dim)">No position</span>
+      </div>
+      <div id="trChart"><canvas id="trCanvas"></canvas></div>
+      <div id="trLog" class="mono"></div>
+    </div></div>
+  </section>
+</main>
+
+<div id="intro">
+  <h2>Mash any key</h2>
+  <p><kbd>a</kbd><kbd>s</kbd><kbd>d</kbd><kbd>f</kbd> &nbsp;The piano is only the beginning</p>
+</div>
+
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+const rnd = (a, b) => a + Math.random() * (b - a);
+const fmt = n => Math.round(n).toLocaleString('en-US');
+
+/* =====================================================================
+   1. Piano  (public-domain pieces only)
+   ===================================================================== */
+const NOTE = {C:0, D:2, E:4, F:5, G:7, A:9, B:11};
+function midi(name) {
+  const m = /^([A-G])([#b]?)(\d)$/.exec(name);
+  return NOTE[m[1]] + (m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0) + 12 * (+m[3] + 1);
+}
+const parse = str => str.trim().split(/\s+/).map(tok => tok.split('+').map(midi));
+
+// Bach prelude: 5 notes per bar → [0,1,2,3,4,2,3,4] x2
+const BACH = [
+  'C4 E4 G4 C5 E5', 'C4 D4 A4 D5 F5', 'B3 D4 G4 D5 F5', 'C4 E4 G4 C5 E5',
+  'C4 E4 A4 E5 A5', 'C4 D4 F#4 A4 D5', 'B3 D4 G4 D5 G5', 'B3 C4 E4 G4 C5',
+  'A3 C4 E4 G4 C5', 'D3 A3 D4 F#4 C5', 'G3 B3 D4 G4 B4', 'G3 Bb3 E4 G4 C#5',
+  'F3 A3 D4 A4 D5', 'F3 Ab3 D4 F4 B4', 'E3 G3 C4 G4 C5', 'E3 F3 A3 C4 F4',
+  'D3 F3 A3 C4 F4', 'G2 D3 G3 B3 F4', 'C3 E3 G3 C4 E4',
+].flatMap(bar => {
+  const n = bar.split(' ').map(midi);
+  const half = [0, 1, 2, 3, 4, 2, 3, 4].map(i => [n[i]]);
+  return [...half, ...half];
+});
+const ELISE_A = 'E5 D#5 E5 D#5 E5 B4 D5 C5 A4+A2 E3 A3 C4 E4 A4 B4+E2 E3 G#3 E4 G#4 B4 C5+A2 E3 A3 E4 ';
+const ELISE_B = 'E5 D#5 E5 D#5 E5 B4 D5 C5 A4+A2 E3 A3 C4 E4 A4 B4+E2 E3 G#3 E4 C5 B4 A4+A2 E3 A3 ';
+// Original 12-bar jazz blues in F: [melody (8 eighths), walking bass (4 quarters), chord shells]
+const BLUES = [
+  ['C5 D5 F5 D5 Ab4 A4 C5 F4',    'F2 A2 C3 D3',   'A3+Eb4'],
+  ['Ab4 Bb4 D5 F5 Ab5 F5 D5 Bb4', 'Bb2 C3 D3 E3',  'Ab3+D4'],
+  ['C5 A4 F4 A4 C5 Eb5 D5 C5',    'F3 Eb3 D3 C3',  'A3+Eb4'],
+  ['B4 C5 Eb5 F5 Ab5 A5 F5 Eb5',  'F2 A2 C3 B2',   'A3+Eb4'],
+  ['D5 Bb4 Ab4 F4 Ab4 Bb4 D5 F5', 'Bb2 D3 F3 D3',  'Ab3+D4'],
+  ['Eb5 D5 Bb4 Ab4 F4 Ab4 Bb4 B4','Bb2 Ab2 G2 Gb2','Ab3+D4'],
+  ['C5 A4 C5 F5 A5 F5 C5 A4',     'F2 G2 A2 C3',   'A3+Eb4'],
+  ['F#4 A4 C5 Eb5 D5 C5 A4 F#4',  'D3 C3 A2 Ab2',  'F#3+C4'],
+  ['G4 Bb4 D5 F5 A5 F5 D5 Bb4',   'G2 Bb2 D3 Db3', 'F3+Bb3'],
+  ['E5 G5 Bb5 G5 E5 Db5 C5 Bb4',  'C3 Bb2 A2 G2',  'Bb3+E4'],
+  ['A4 C5 F5 C5 F#4 A4 C5 Eb5',   'F2 A2 D3 A2',   'A3+Eb4|F#3+C4'],
+  ['D5 Bb4 G4 Bb4 E4 G4 Bb4 Db5', 'G2 Bb2 C3 E2',  'F3+Bb3|Bb3+E4'],
+].flatMap(([mel, bass, shells]) => {
+  const b = bass.split(' '), c = shells.split('|');
+  return mel.split(' ').map((n, i) => {
+    let t = n;
+    if (i % 2 === 0) t += '+' + b[i / 2];
+    if (i === 0) t += '+' + c[0];
+    if (i === 4 && c[1]) t += '+' + c[1];
+    return t.split('+').map(midi);
+  });
+});
+const SONGS = [
+  {title: 'Bach — Prelude in C major', notes: BACH},
+  {title: 'Jazz — 12-Bar Blues in F', notes: [...BLUES, ...BLUES]},
+  {title: 'Beethoven — Für Elise', notes: parse((ELISE_A + ELISE_B).repeat(2))},
+];
+
+let ac = null, master = null, muted = false;
+function audio() {
+  if (!ac) {
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+    master = ac.createGain(); master.gain.value = 0.5;
+    const comp = ac.createDynamicsCompressor();
+    master.connect(comp); comp.connect(ac.destination);
+  }
+  if (ac.state === 'suspended') ac.resume();
+}
+function playNote(m) {
+  if (!ac || muted) return;
+  const t = ac.currentTime, f = 440 * Math.pow(2, (m - 69) / 12);
+  const g = ac.createGain();
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(0.32, t + 0.006);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 1.9);
+  const lp = ac.createBiquadFilter(); lp.type = 'lowpass';
+  lp.frequency.setValueAtTime(Math.min(f * 6, 9000), t);
+  lp.frequency.exponentialRampToValueAtTime(Math.max(f * 1.5, 300), t + 1.2);
+  [['triangle', 1, 1], ['sine', 2, 0.3], ['sine', 3, 0.1]].forEach(([type, mult, amp]) => {
+    const o = ac.createOscillator(), og = ac.createGain();
+    o.type = type; o.frequency.value = f * mult; og.gain.value = amp;
+    o.connect(og); og.connect(lp); o.start(t); o.stop(t + 2);
+  });
+  lp.connect(g); g.connect(master);
+}
+
+const pn = {song: 0, i: 0, lit: new Map(), sparks: []};
+function pianoStep() {
+  const song = SONGS[pn.song], now = performance.now();
+  for (const m of song.notes[pn.i]) {
+    playNote(m); pn.lit.set(m, now); pn.sparks.push({m, t: now});
+  }
+  if (pn.sparks.length > 80) pn.sparks.splice(0, pn.sparks.length - 80);
+  if (++pn.i >= song.notes.length) { pn.i = 0; pn.song = (pn.song + 1) % SONGS.length; }
+  $('#pnTitle').textContent = '♪ ' + SONGS[pn.song].title;
+}
+
+function fit(cv) {
+  const d = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+  const W = Math.round(w * d), H = Math.round(h * d);
+  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+  const ctx = cv.getContext('2d'); ctx.setTransform(d, 0, 0, d, 0, 0);
+  return [ctx, w, h];
+}
+const LO = 36, HI = 84, isBlack = m => [1, 3, 6, 8, 10].includes(m % 12);
+const WHITES = []; for (let m = LO; m <= HI; m++) if (!isBlack(m)) WHITES.push(m);
+function drawPiano(now) {
+  const [c, w, h] = fit($('#pnCanvas')); if (!w || !h) return;
+  c.clearRect(0, 0, w, h);
+  const kh = Math.min(h * 0.42, 130), top = h - kh, ww = w / WHITES.length, bw = ww * 0.62;
+  const keyX = m => isBlack(m) ? (WHITES.indexOf(m - 1) + 1) * ww - bw / 2 : WHITES.indexOf(m) * ww;
+  const hue = m => (m - LO) * 6 + 180;
+  // rising notes
+  for (const s of pn.sparks) {
+    const age = now - s.t; if (age > 2600) continue;
+    const kw = isBlack(s.m) ? bw : ww;
+    c.globalAlpha = 1 - age / 2600;
+    c.fillStyle = 'hsl(' + hue(s.m) + ' 90% 65%)';
+    c.beginPath(); c.roundRect(keyX(s.m) + 1, top - 26 - age * 0.11, kw - 2, 22, 4); c.fill();
+  }
+  c.globalAlpha = 1;
+  const glow = m => { const t = pn.lit.get(m); return t ? Math.max(0, 1 - (now - t) / 500) : 0; };
+  for (const m of WHITES) {
+    const x = keyX(m), g = glow(m);
+    c.fillStyle = '#f4f5f7'; c.fillRect(x + 0.5, top, ww - 1, kh);
+    if (g) { c.globalAlpha = g; c.fillStyle = 'hsl(' + hue(m) + ' 95% 60%)'; c.fillRect(x + 0.5, top, ww - 1, kh); c.globalAlpha = 1; }
+  }
+  for (let m = LO; m <= HI; m++) {
+    if (!isBlack(m)) continue;
+    const x = keyX(m), g = glow(m);
+    c.fillStyle = '#12141a'; c.fillRect(x, top, bw, kh * 0.62);
+    if (g) { c.globalAlpha = g; c.fillStyle = 'hsl(' + hue(m) + ' 95% 55%)'; c.fillRect(x, top, bw, kh * 0.62); c.globalAlpha = 1; }
+  }
+}
+
+/* =====================================================================
+   2. Coding
+   ===================================================================== */
+const SRC_TS = [
+'// multitask.ts — doing six things at once, right now',
+'import { Piano, Chess, Minesweeper, Excel, Market } from "./everything";',
+'import { panic } from "./never-used";',
+'',
+'type Task = { name: string; difficulty: "easy"; done: true };',
+'',
+'const CONCURRENCY = Number.POSITIVE_INFINITY;',
+'const COFFEE_PER_HOUR = 4.5;',
+'',
+'export async function doEverything(fingers: Finger[]): Promise<Legend> {',
+'  const piano = new Piano({ practice: false, talent: "yes" });',
+'  const chess = new Chess({ depth: 64, opponent: "grandmaster" });',
+'  const mines = new Minesweeper({ guess: never });',
+'  const sheet = new Excel("2026_results_final_FINAL_v2.xlsx");',
+'  const market = new Market({ buy: "low", sell: "high" });',
+'',
+'  for await (const key of keyboard.mash(fingers)) {',
+'    await Promise.all([',
+'      piano.playNextNote(key),',
+'      chess.findBestMove().then(move => chess.play(move)),',
+'      mines.revealSafeCell(),',
+'      sheet.fillCell({ formula: "=SUM(genius)" }),',
+'      market.trade({ regret: 0 }),',
+'    ]);',
+'    if (boss.isWatching()) productivity *= 2;',
+'  }',
+'',
+'  return { status: "legend", overtime: 0, bugs: [] };',
+'}',
+'',
+'function estimateIQ(keystrokes: number): number {',
+'  // TODO: add an upper bound (probably not needed)',
+'  return 100 + keystrokes * 0.4;',
+'}',
+'',
+'class Finger {',
+'  private tired = false;',
+'  press(key: string) {',
+'    if (this.tired) throw new Error("unreachable");',
+'    return key.length > 0 ? "genius" : "still genius";',
+'  }',
+'}',
+'',
+'// all tests pass (there are no tests)',
+'describe("doEverything", () => {',
+'  it("should do everything", async () => {',
+'    expect(await doEverything(tenFingers)).toBeLegendary();',
+'  });',
+'});',
+'',
+'git.commit("-m", "fix: fixed everything");',
+'git.push("--force", "origin", "main"); // Friday, 5:59 pm',
+'',
+''].join('\n');
+const SRC_PY = String.raw`# penguins.py — annual census of an Antarctic penguin colony
+from dataclasses import dataclass, field
+import random
+
+FISH_PER_DAY = 2.5
+WADDLE_SPEED_KMH = 1.9
+BLIZZARD_ODDS = 0.08
+
+
+@dataclass
+class Penguin:
+    name: str
+    age: int = 0
+    belly: float = 1.0
+    pebbles: list[str] = field(default_factory=list)
+
+    def waddle(self, km: float) -> float:
+        # returns hours spent waddling. dignity is not tracked
+        self.belly -= km * 0.02
+        return km / WADDLE_SPEED_KMH
+
+    def eat(self, fish: float) -> None:
+        self.belly = min(self.belly + fish / FISH_PER_DAY, 3.0)
+
+    @property
+    def is_round(self) -> bool:
+        return self.belly > 1.5
+
+
+class Colony:
+    def __init__(self, size: int):
+        self.birds = [Penguin(f"penguin_{i:04d}") for i in range(size)]
+        self.day = 0
+
+    def huddle(self) -> list[list[Penguin]]:
+        # roundest penguins take the windy outer ring. it's only fair
+        ranked = sorted(self.birds, key=lambda p: p.belly, reverse=True)
+        return [ranked[i::4] for i in range(4)]
+
+    def steal_pebble(self, thief: Penguin, victim: Penguin) -> bool:
+        if not victim.pebbles:
+            return False
+        thief.pebbles.append(victim.pebbles.pop())
+        return True  # victim will notice in 3 to 5 business days
+
+    def step(self) -> None:
+        self.day += 1
+        blizzard = random.random() < BLIZZARD_ODDS
+        for p in self.birds:
+            if blizzard:
+                p.belly -= 0.1
+            else:
+                p.waddle(random.uniform(1, 12))
+                p.eat(random.gauss(FISH_PER_DAY, 0.8))
+
+    def census(self) -> dict[str, float]:
+        n = len(self.birds)
+        return {
+            "day": self.day,
+            "population": n,
+            "round_ratio": sum(p.is_round for p in self.birds) / n,
+            "pebbles": sum(len(p.pebbles) for p in self.birds),
+        }
+
+
+if __name__ == "__main__":
+    colony = Colony(size=4200)
+    for _ in range(365):
+        colony.step()
+    print(colony.census())  # everyone is round. the model works
+
+`;
+const CODE_FILES = [{name: 'multitask.ts', src: SRC_TS}, {name: 'penguins.py', src: SRC_PY}];
+const code = {file: 0, pos: 0, out: ''};
+function codeStep() {
+  for (let k = 0; k < 4; k++) {
+    const f = CODE_FILES[code.file];
+    code.out += f.src[code.pos++];
+    if (code.pos >= f.src.length) {            // file finished → open the next one
+      code.pos = 0; code.file = (code.file + 1) % CODE_FILES.length; code.out = '';
+      $('#codeName').textContent = CODE_FILES[code.file].name;
+    }
+  }
+  if (code.out.length > 4000) code.out = code.out.slice(-3000);
+  $('#codeOut span').textContent = code.out;
+}
+
+/* =====================================================================
+   3. Minesweeper  (never blows up)
+   ===================================================================== */
+const MS = {W: 12, H: 9, M: 17};
+const ms = {cells: [], cur: 0, done: false, clears: 0};
+const msNb = i => {
+  const x = i % MS.W, y = (i / MS.W) | 0, out = [];
+  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+    const nx = x + dx, ny = y + dy;
+    if ((dx || dy) && nx >= 0 && ny >= 0 && nx < MS.W && ny < MS.H) out.push(ny * MS.W + nx);
+  }
+  return out;
+};
+function msReveal(i) {
+  const stack = [i];
+  while (stack.length) {
+    const j = stack.pop(), c = ms.cells[j];
+    if (c.open || c.mine) continue;
+    c.open = true;
+    if (c.n === 0) stack.push(...msNb(j));
+  }
+}
+function msNew() {
+  const N = MS.W * MS.H, start = (Math.random() * N) | 0, safe = new Set([start, ...msNb(start)]);
+  ms.cells = Array.from({length: N}, () => ({mine: false, n: 0, open: false, flag: false}));
+  let left = MS.M;
+  while (left) {
+    const i = (Math.random() * N) | 0;
+    if (safe.has(i) || ms.cells[i].mine) continue;
+    ms.cells[i].mine = true; left--;
+  }
+  ms.cells.forEach((c, i) => { c.n = msNb(i).filter(j => ms.cells[j].mine).length; });
+  ms.cur = start; ms.done = false; msReveal(start);
+}
+function msStep() {
+  if (ms.done) { msNew(); msRender(); return; }
+  const front = [], flags = [], restSafe = [], restMine = [];
+  ms.cells.forEach((c, i) => {
+    if (c.open || c.flag) return;
+    const edge = msNb(i).some(j => ms.cells[j].open);
+    if (c.mine) (edge ? flags : restMine).push(i); else (edge ? front : restSafe).push(i);
+  });
+  const dist = i => Math.abs(i % MS.W - ms.cur % MS.W) + Math.abs(((i / MS.W) | 0) - ((ms.cur / MS.W) | 0));
+  const nearest = list => list.reduce((a, b) => dist(b) < dist(a) ? b : a);
+  let target, flag = false;
+  if (flags.length && (Math.random() < 0.35 || !front.length)) { target = nearest(flags); flag = true; }
+  else if (front.length) target = nearest(front);
+  else if (restSafe.length) target = nearest(restSafe);
+  else if (restMine.length) { target = nearest(restMine); flag = true; }
+  if (target !== undefined) {
+    if (flag) ms.cells[target].flag = true; else msReveal(target);
+    ms.cur = target;
+  }
+  if (ms.cells.every(c => c.mine ? c.flag : c.open)) {
+    ms.done = true; ms.clears++;
+    $('#msSub').textContent = 'Cleared ' + ms.clears + ' · Deaths 0';
+  }
+  msRender();
+}
+function msRender() {
+  const pad = n => String(n).padStart(3, '0');
+  $('#msBoard').innerHTML = ms.cells.map((c, i) => {
+    const cur = i === ms.cur && !ms.done ? ' cur' : '';
+    if (c.open) return '<div class="o n' + c.n + cur + '">' + (c.n || '') + '</div>';
+    return '<div class="' + cur + '">' + (c.flag ? '🚩' : '') + '</div>';
+  }).join('');
+  $('#msLeft').textContent = pad(MS.M - ms.cells.filter(c => c.flag).length);
+  $('#msOpen').textContent = pad(ms.cells.filter(c => c.open).length);
+  $('#msFace').textContent = ms.done ? '😎' : '🙂';
+}
+
+/* =====================================================================
+   4. Chess  (the Opera Game, 1858 — replayed move by move)
+   ===================================================================== */
+const CH_START = ['rnbqkbnr', 'pppppppp', '........', '........', '........', '........', 'PPPPPPPP', 'RNBQKBNR'];
+const CH_UCI = ('e2e4 e7e5 g1f3 d7d6 d2d4 c8g4 d4e5 g4f3 d1f3 d6e5 f1c4 g8f6 f3b3 d8e7 b1c3 c7c6 c1g5 b7b5 ' +
+  'c3b5 c6b5 c4b5 b8d7 e1c1 a8d8 d1d7 d8d7 h1d1 e7e6 b5d7 f6d7 b3b8 d7b8 d1d8').split(' ');
+const CH_SAN = ('e4 e5 Nf3 d6 d4 Bg4 dxe5 Bxf3 Qxf3 dxe5 Bc4 Nf6 Qb3 Qe7 Nc3 c6 Bg5 b5 Nxb5 cxb5 Bxb5+ Nbd7 ' +
+  'O-O-O Rd8 Rxd7 Rxd7 Rd1 Qe6 Bxd7+ Nxd7 Qb8+ Nxb8 Rd8#').split(' ');
+const GLYPH = {k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟'};
+const ch = {b: [], i: 0, wins: 0, last: []};
+function chReset() { ch.b = CH_START.map(r => r.split('')); ch.i = 0; ch.last = []; }
+function chStep() {
+  if (ch.i >= CH_UCI.length) { chReset(); chRender(); return; }
+  const u = CH_UCI[ch.i], sq = s => [8 - +s[1], s.charCodeAt(0) - 97];
+  const [r1, c1] = sq(u.slice(0, 2)), [r2, c2] = sq(u.slice(2, 4));
+  const p = ch.b[r1][c1];
+  ch.b[r2][c2] = p; ch.b[r1][c1] = '.';
+  if (p.toLowerCase() === 'k' && Math.abs(c2 - c1) === 2) {           // castling
+    const from = c2 > c1 ? 7 : 0, to = c2 > c1 ? 5 : 3;
+    ch.b[r1][to] = ch.b[r1][from]; ch.b[r1][from] = '.';
+  }
+  ch.last = [r1 * 8 + c1, r2 * 8 + c2];
+  ch.i++;
+  if (ch.i === CH_UCI.length) { ch.wins++; $('#chSub').textContent = ch.wins + 'W 0L'; }
+  chRender();
+}
+function chRender() {
+  const cells = $('#chBoard').children;
+  for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) {
+    const p = ch.b[r][c], el = cells[r * 8 + c], k = r * 8 + c;
+    el.className = ((r + c) % 2 ? 'd' : '') + (ch.last.includes(k) ? ' hl' : '');
+    el.innerHTML = p === '.' ? '' :
+      '<span class="' + (p === p.toUpperCase() ? 'w' : 'b') + '">' + GLYPH[p.toLowerCase()] + '︎</span>';
+  }
+  const done = ch.i === CH_UCI.length, i = ch.i - 1;
+  $('#chEval i').style.height = (50 + 50 * Math.pow(ch.i / CH_UCI.length, 1.5)) + '%';
+  $('#chInfo').innerHTML = ch.i === 0 ? 'White to move · eval +0.2' :
+    '<b>' + ((i >> 1) + 1) + (i % 2 ? '… ' : '. ') + CH_SAN[i] + '</b> · ' +
+    (done ? 'Checkmate! 1-0 🏆' : 'eval +' + (0.2 + 9 * Math.pow(ch.i / CH_UCI.length, 2)).toFixed(1));
+}
+
+/* =====================================================================
+   5. Excel
+   ===================================================================== */
+const XL_COLS = 'ABCDEF', XL_ROWS = 9;
+const XL_THEMES = [
+  {h: 'Month', rows: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']},
+  {h: 'Region', rows: ['North', 'South', 'East', 'West', 'Central', 'Online']},
+  {h: 'Product', rows: ['Piano', 'Keyboard', 'Mouse', 'Monitor', 'Chair', 'Coffee']},
+];
+const xl = {queue: [], sheet: 0};
+function xlBuild() {
+  let html = '<tr><th></th>' + [...XL_COLS].map(c => '<th>' + c + '</th>').join('') + '</tr>';
+  for (let r = 1; r <= XL_ROWS; r++)
+    html += '<tr><th>' + r + '</th>' + [...XL_COLS].map(c => '<td id="xl' + c + r + '"></td>').join('') + '</tr>';
+  $('#xlTable').innerHTML = html;
+}
+function xlNew() {
+  const th = XL_THEMES[xl.sheet % XL_THEMES.length]; xl.sheet++;
+  xlBuild();
+  $('#xlTabs').textContent = 'Sheet' + xl.sheet + ' · Results by ' + th.h.toLowerCase();
+  const q = [];
+  [th.h, 'Revenue', 'Cost', 'Profit', 'Margin', 'Notes'].forEach((t, i) => q.push({a: XL_COLS[i] + 1, f: t, v: t, cls: 'h'}));
+  let sb = 0, sc = 0;
+  th.rows.forEach((name, k) => {
+    const r = k + 2, b = Math.round(rnd(500, 1500)) * 10, c = Math.round(b * rnd(0.4, 0.7) / 10) * 10, d = b - c, e = d / b;
+    sb += b; sc += c;
+    q.push({a: 'A' + r, f: name, v: name, cls: 'l'});
+    q.push({a: 'B' + r, f: String(b), v: fmt(b)});
+    q.push({a: 'C' + r, f: String(c), v: fmt(c)});
+    q.push({a: 'D' + r, f: '=B' + r + '-C' + r, v: fmt(d), bar: d / 9000});
+    q.push({a: 'E' + r, f: '=D' + r + '/B' + r, v: (e * 100).toFixed(1) + '%'});
+    q.push({a: 'F' + r, f: '=IF(E' + r + '>45%,"Great","OK")', v: e > 0.45 ? 'Great 🔥' : 'OK', cls: 'l'});
+  });
+  const R = th.rows.length + 2, L = R - 1;
+  q.push({a: 'A' + R, f: 'Total', v: 'Total', cls: 'l t'});
+  q.push({a: 'B' + R, f: '=SUM(B2:B' + L + ')', v: fmt(sb), cls: 't'});
+  q.push({a: 'C' + R, f: '=SUM(C2:C' + L + ')', v: fmt(sc), cls: 't'});
+  q.push({a: 'D' + R, f: '=SUM(D2:D' + L + ')', v: fmt(sb - sc), cls: 't'});
+  q.push({a: 'E' + R, f: '=D' + R + '/B' + R, v: ((sb - sc) / sb * 100).toFixed(1) + '%', cls: 't'});
+  q.push({a: 'F' + R, f: '=PROMOTION()', v: 'Promoted 🚀', cls: 'l t'});
+  q.push({a: 'A' + (R + 1), f: '', v: '', save: true});
+  xl.queue = q;
+}
+function xlStep() {
+  if (!xl.queue.length) xlNew();
+  const s = xl.queue.shift();
+  document.querySelectorAll('#xlTable td.act').forEach(e => e.classList.remove('act'));
+  const td = $('#xl' + s.a);
+  td.textContent = s.v; td.className = (s.cls || '') + ' act';
+  if (s.bar) td.style.background = 'linear-gradient(90deg,#bfe6cd ' + Math.min(100, s.bar * 100) + '%,transparent 0)';
+  $('#xlName').textContent = s.a;
+  $('#xlFormula').textContent = s.save ? 'Saved ✓  (opening next sheet…)' : s.f;
+}
+
+/* =====================================================================
+   6. Trading  (never loses. up = green, down = red)
+   ===================================================================== */
+const tr = {candles: [], ticks: 0, price: 50000, pos: null, pnl: 0, wins: 0, since: 0, log: []};
+function trTick() {
+  const prev = tr.price;
+  tr.price = Math.max(1000, Math.round(prev * (1 + rnd(-0.007, 0.007) + 0.0012) / 10) * 10);
+  let cur = tr.candles[tr.candles.length - 1];
+  if (!cur || tr.ticks >= 4) {
+    cur = {o: prev, h: prev, l: prev, c: prev};
+    tr.candles.push(cur); tr.ticks = 0;
+    if (tr.candles.length > 48) tr.candles.shift();
+  }
+  cur.c = tr.price; cur.h = Math.max(cur.h, tr.price); cur.l = Math.min(cur.l, tr.price);
+  tr.ticks++;
+}
+function trLogAdd(cls, text) {
+  const t = new Date().toTimeString().slice(0, 8);
+  tr.log.push('<div class="' + cls + '">' + t + ' ' + text + '</div>');
+  if (tr.log.length > 4) tr.log.shift();
+  $('#trLog').innerHTML = tr.log.join('');
+}
+function trStep() {
+  trTick(); tr.since++;
+  if (!tr.pos && tr.since >= 3 && Math.random() < 0.5) {
+    tr.pos = {p: tr.price, q: 10 + ((Math.random() * 90) | 0)}; tr.since = 0;
+    trLogAdd('buy', 'BUY ' + tr.pos.q + ' sh @ ' + fmt(tr.price));
+  } else if (tr.pos && tr.since >= 3 && tr.price > tr.pos.p * 1.004) {
+    const gain = (tr.price - tr.pos.p) * tr.pos.q;
+    tr.pnl += gain; tr.wins++; tr.since = 0;
+    trLogAdd('sell', 'SELL ' + tr.pos.q + ' sh @ ' + fmt(tr.price) + '  (+$' + fmt(gain) + ')');
+    tr.pos = null;
+  }
+  $('#trPrice').textContent = fmt(tr.price);
+  $('#trPnl').textContent = '+$' + fmt(tr.pnl);
+  $('#trWin').textContent = tr.wins ? '100% (' + tr.wins + ' of ' + tr.wins + ')' : '-';
+  $('#trPos').textContent = tr.pos ? 'Long ' + tr.pos.q + ' sh @ ' + fmt(tr.pos.p) : 'No position';
+}
+function drawTrade() {
+  const [c, w, h] = fit($('#trCanvas')); if (!w || !h) return;
+  c.clearRect(0, 0, w, h);
+  const cs = tr.candles, padR = 52, cw = (w - padR) / 48;
+  let lo = Infinity, hi = -Infinity;
+  for (const k of cs) { lo = Math.min(lo, k.l); hi = Math.max(hi, k.h); }
+  const m = (hi - lo) * 0.1 || 1; lo -= m; hi += m;
+  const y = p => 6 + (h - 12) * (1 - (p - lo) / (hi - lo));
+  c.strokeStyle = '#1e2433'; c.lineWidth = 1;
+  for (let g = 1; g < 4; g++) { c.beginPath(); c.moveTo(0, h * g / 4); c.lineTo(w - padR, h * g / 4); c.stroke(); }
+  cs.forEach((k, i) => {
+    const x = i * cw + cw / 2, up = k.c >= k.o;
+    c.strokeStyle = c.fillStyle = up ? '#2ecc71' : '#ff5d6c';
+    c.beginPath(); c.moveTo(x, y(k.h)); c.lineTo(x, y(k.l)); c.stroke();
+    const y1 = y(Math.max(k.o, k.c)), y2 = y(Math.min(k.o, k.c));
+    c.fillRect(x - cw * 0.32, y1, cw * 0.64, Math.max(1, y2 - y1));
+  });
+  if (tr.pos) {
+    c.setLineDash([4, 4]); c.strokeStyle = '#ffd166';
+    c.beginPath(); c.moveTo(0, y(tr.pos.p)); c.lineTo(w - padR, y(tr.pos.p)); c.stroke(); c.setLineDash([]);
+  }
+  const py = y(tr.price);
+  c.fillStyle = '#1f9d57'; c.fillRect(w - padR + 2, py - 8, padR - 4, 16);
+  c.fillStyle = '#fff'; c.font = '10px ui-monospace,Menlo,monospace'; c.textBaseline = 'middle';
+  c.fillText(fmt(tr.price), w - padR + 6, py);
+}
+
+/* =====================================================================
+   Engine: one key press → every open panel advances one step
+   ===================================================================== */
+const PANELS = [
+  {id: 'p-piano', name: '🎹 Piano',   at: 0,   every: 1, step: pianoStep},
+  {id: 'p-code',  name: '💻 Coding',     at: 12,  every: 1, step: codeStep},
+  {id: 'p-mines', name: '💣 Minesweeper', at: 40,  every: 2, step: msStep},
+  {id: 'p-chess', name: '♟️ Chess',     at: 80,  every: 3, step: chStep},
+  {id: 'p-excel', name: '📊 Excel',     at: 130, every: 2, step: xlStep},
+  {id: 'p-trade', name: '📈 Trading', at: 190, every: 1, step: trStep},
+];
+PANELS.forEach(p => { p.el = document.getElementById(p.id); p.acc = 0; p.on = p.at === 0; });
+let total = 0, stamps = [];
+
+function hit() {
+  audio();
+  if (total === 0) $('#intro').classList.add('gone');
+  total++; stamps.push(performance.now());
+  for (const p of PANELS) {
+    if (!p.on && total >= p.at) {
+      p.on = true; p.el.hidden = false;
+      const n = PANELS.filter(q => q.on).length;
+      $('#grid').dataset.n = n; $('#sTasks').textContent = n;
+      layout();
+    }
+    if (p.on && ++p.acc >= p.every) { p.acc = 0; p.step(); }
+  }
+  $('#sKeys').textContent = fmt(total);
+  $('#sIq').textContent = 100 + Math.floor(total * 0.4);
+}
+addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (['Shift', 'CapsLock', 'Meta', 'Control', 'Alt', 'Escape'].includes(e.key) || /^F\d+$/.test(e.key)) return;
+  e.preventDefault();
+  hit();
+});
+addEventListener('pointerdown', e => { if (!e.target.closest('button')) hit(); });
+$('#mute').addEventListener('click', e => {
+  muted = !muted; e.currentTarget.textContent = muted ? '🔇' : '🔊'; e.currentTarget.blur();
+});
+setInterval(() => {
+  const now = performance.now(); stamps = stamps.filter(t => now - t < 5000);
+  $('#sKpm').textContent = fmt(stamps.length * 12);
+  $('#sFocus').textContent = (100 * PANELS.filter(p => p.on).length) + '%';
+}, 250);
+
+// size the boards to their panels
+function layout() {
+  const mb = $('#p-mines .body');
+  if (mb.clientWidth) {
+    const s = Math.max(8, Math.floor(Math.min((mb.clientWidth - 16) / MS.W, (mb.clientHeight - 48) / MS.H)));
+    const b = $('#msBoard');
+    b.style.gridTemplateColumns = 'repeat(' + MS.W + ',' + s + 'px)';
+    b.style.gridAutoRows = s + 'px'; b.style.fontSize = Math.floor(s * 0.6) + 'px';
+  }
+  const cb = $('#p-chess .body');
+  if (cb.clientWidth) {
+    const s = Math.max(80, Math.floor(Math.min(cb.clientWidth - 40, cb.clientHeight - 40)));
+    const b = $('#chBoard');
+    b.style.width = b.style.height = s + 'px'; b.style.fontSize = Math.floor(s / 8 * 0.78) + 'px';
+  }
+}
+addEventListener('resize', layout);
+
+// init
+$('#pnTitle').textContent = '♪ ' + SONGS[0].title;
+$('#chBoard').innerHTML = '<div></div>'.repeat(64);
+chReset(); chRender();
+msNew(); msRender();
+xlNew();
+for (let i = 0; i < 150; i++) trTick();
+(function frame(now) {
+  drawPiano(now); if (PANELS[5].on) drawTrade();
+  requestAnimationFrame(frame);
+})(performance.now());
+</script>
+</body>
+</html>
